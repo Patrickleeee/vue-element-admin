@@ -84,12 +84,16 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
-            this.loading = false
-            this.$router.push({ path: '/' })
-                // this.showDialog = true
-          }).catch(() => {
-            this.loading = false
+          console.log(this.$store)
+          // restful接口
+          this.$store.dispatch('SendRq').then(() => {
+            this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
+              this.loading = false
+              this.$router.push({ path: '/' })
+                  // this.showDialog = true
+            }).catch(() => {
+              this.loading = false
+            })
           })
         } else {
           console.log('error submit!!')

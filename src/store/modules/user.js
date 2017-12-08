@@ -1,4 +1,4 @@
-import { loginByUsername, logout, getUserInfo } from '@/api/login'
+import { loginByUsername, logout, getUserInfo, sendRq } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -57,6 +57,19 @@ const user = {
           reject(error)
         })
       })
+    },
+
+    SendRq({ commit }) {
+      return new Promise((resolve, reject) => {
+        sendRq().then(response => {
+          console.log('登录请求结果：'.concat(response.data))
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      }
+
+      )
     },
 
     // 获取用户信息
