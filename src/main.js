@@ -9,7 +9,9 @@ import './icons' // icon
 import './errorLog'// error log
 import './permission' // 权限
 import './mock'  // 该项目所有请求使用mockjs模拟
+import echarts from 'echarts'
 
+Vue.prototype.$echarts = echarts
 Vue.use(ElementUI)
 
 // register global utility filters.
