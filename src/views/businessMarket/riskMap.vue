@@ -1,13 +1,13 @@
-<template>
+<template lang="html">
   <div class="dashboard">          
     <div class="flex-container column">
         <div class="item one" @click="clickChart('1')" id="mapContainer" style="transform: translate(-34%,-34%) scale(0.3)">
         </div>
-        <div class="item one" @click="clickChart('1')" id="mapContainer1" style="transform: translate(-34%,-3.5%) scale(0.3)">
+        <div class="item two" @click="clickChart('2')" id="mapContainer1" style="transform: translate(-34%,-3.5%) scale(0.3)">
         </div>
-        <div class="item one" @click="clickChart('1')" id="mapContainer2" style="transform: translate(-34%,27%) scale(0.3)">
+        <div class="item three" @click="clickChart('3')" id="mapContainer2" style="transform: translate(-34%,27%) scale(0.3)">
         </div>
-        <div class="item two" @click="clickChart('1')" id="mapContainer3" style="transform: translate(13.7%, -24%) scale(0.5)">
+        <div class="item four active" @click="clickChart('4')" id="mapContainer3" style="transform: translate(10.7%, -24%) scale(0.5)">
         </div>
     </div>
   </div>
@@ -117,7 +117,7 @@ export default {
 } */
 .active{
   height:100%;
-  width:69%;
+  width:100%;
   margin-left: 10px;
   line-height: 300px;     
 }
