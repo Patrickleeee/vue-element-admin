@@ -1,5 +1,13 @@
+<style>
+.mainApp{
+  position:absolute;
+  height:100%;
+  width:100%;
+}
+</style>
+
 <template>
-	<div id="app">
+	<div id="app" class="mainApp">
 		<router-view></router-view>
 	</div>
 </template>
