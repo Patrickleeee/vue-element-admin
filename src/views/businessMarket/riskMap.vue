@@ -1,13 +1,13 @@
 <template lang="html">
   <div class="dashboard">          
     <div class="flex-container column">
-        <div class="item one" @click="clickChart('1')" id="mapContainer" style="transform: translate(-32.6%,-32.7%) scale(0.33)">
+        <div class="item one" @click="clickChart('1')" id="radarContainer" style="transform: translate(-32.6%,-32.7%) scale(0.33)">
         </div>
         <div class="item two" @click="clickChart('2')" id="pieContainer" style="transform: translate(-32.6%,1.7%) scale(0.33)">
         </div>
-        <div class="item three" @click="clickChart('3')" id="barContainer" style="transform: translate(-32.6%,36%) scale(0.33)">
+        <div class="item three" @click="clickChart('3')" id="lineContainer" style="transform: translate(-32.6%,36%) scale(0.33)">
         </div>
-        <div class="item four active" @click="clickChart('4')" id="radarContainer" style="transform: translate(33.5%, 0.3%) scale(0.99)">
+        <div class="item four active" @click="clickChart('4')" id="mapContainer" style="transform: translate(33.5%, 0.3%) scale(0.99)">
         </div>
     </div>
   </div>
@@ -57,9 +57,9 @@ export default {
       var myPie = this.$echarts.init(document.getElementById('pieContainer'))
       myPie.setOption(pie)
 
-      // bar
-      var myBar = this.$echarts.init(document.getElementById('barContainer'))
-      myBar.setOption(line)
+      // line
+      var myLine = this.$echarts.init(document.getElementById('lineContainer'))
+      myLine.setOption(line)
 
       // radar
       var myRadar = this.$echarts.init(document.getElementById('radarContainer'))

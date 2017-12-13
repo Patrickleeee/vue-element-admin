@@ -1,7 +1,7 @@
 export default{
   title: {
-    text: '浏览器占比变化',
-    subtext: '纯属虚构',
+    text: '今日购风控拦截雷达',
+    subtext: 'data from homefax',
     top: 10,
     left: 10
   },
@@ -29,11 +29,11 @@ export default{
   },
   radar: {
     indicator: [
-           { text: 'IE8-', max: 400 },
-           { text: 'IE9+', max: 400 },
-           { text: 'Safari', max: 400 },
-           { text: 'Firefox', max: 400 },
-           { text: 'Chrome', max: 400 }
+           { text: '羊毛党', max: 400 },
+           { text: '欺诈人群', max: 400 },
+           { text: '失信人群', max: 400 },
+           { text: '逾期用户', max: 400 },
+           { text: '正常用户', max: 400 }
     ]
   },
   series: (function() {
