@@ -1,13 +1,13 @@
 <template lang="html">
   <div class="dashboard">          
     <div class="flex-container column">
-        <div class="item one" @click="clickChart('1')" id="mapContainer" style="transform: translate(-34%,-34%) scale(0.3)">
+        <div class="item one" @click="clickChart('1')" id="mapContainer" style="transform: translate(-32.6%,-32.7%) scale(0.33)">
         </div>
-        <div class="item two" @click="clickChart('2')" id="mapContainer1" style="transform: translate(-34%,-3.5%) scale(0.3)">
+        <div class="item two" @click="clickChart('2')" id="mapContainer1" style="transform: translate(-32.6%,1.7%) scale(0.33)">
         </div>
-        <div class="item three" @click="clickChart('3')" id="mapContainer2" style="transform: translate(-34%,27%) scale(0.3)">
+        <div class="item three" @click="clickChart('3')" id="mapContainer2" style="transform: translate(-32.6%,36%) scale(0.33)">
         </div>
-        <div class="item four active" @click="clickChart('4')" id="mapContainer3" style="transform: translate(10.7%, -24%) scale(0.5)">
+        <div class="item four active" @click="clickChart('4')" id="mapContainer3" style="transform: translate(33.5%, 0.3%) scale(0.99)">
         </div>
     </div>
   </div>
@@ -28,6 +28,7 @@ export default {
   name: '',
   data() {
     return {
+      items: []
     }
   },
   methods: {
@@ -40,6 +41,10 @@ export default {
     //   }, 20)
     // },
     drawChinaMap() {
+      this.items = document.querySelectorAll('.flex-container .item')
+      for (let i = 0; i < this.items.length; i++) {
+        this.items[i].dataset.order = i + 1
+      }
       var myChart = this.$echarts.init(document.getElementById('mapContainer'))
       myChart.setOption(map)
       var myChart1 = this.$echarts.init(document.getElementById('mapContainer1'))
@@ -54,15 +59,16 @@ export default {
         myChart.resize()
       })
     },
-    _init() {
-      this.items = document.querySelectorAll('.flex-container .item')
-      for (let i = 0; i < this.items.length; i++) {
-        this.items[i].dataset.order = i + 1
-      }
-    },
+    // _init() {
+    //   this.items = document.querySelectorAll('.flex-container .item')
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.items[i].dataset.order = i + 1
+    //   }
+    // },
     clickChart(clickIndex) {
       const activeItem = document.querySelector('.flex-container .active')
       const activeIndex = activeItem.dataset.order
+      console.log(activeIndex)
       const clickItem = this.items[clickIndex - 1]
       if (activeIndex === clickIndex) {
         return
@@ -89,8 +95,8 @@ export default {
 .item{
   padding: 0px;
   margin: 0px;
-  width: 100%;
-  height: 100%;
+  width: 66%;
+  height: 91.5%;
   position:absolute;
   transform:scale(0.33);
   text-align: center;
@@ -116,8 +122,8 @@ export default {
   box-sizing: content-box;
 } */
 .active{
-  height:100%;
-  width:100%;
+  width: 66%;
+  height: 94%;
   margin-left: 10px;
   line-height: 300px;     
 }
