@@ -91,29 +91,29 @@ export default {
   },
   mounted() {
     this.drawChinaMap()
-    let dataIndex = -1
-    const pie = this.$refs.pie
-    const dataLen = pie.options.series[0].data.length
-    setInterval(() => {
-      pie.dispatchAction({
-        type: 'downplay',
-        seriesIndex: 0,
-        dataIndex
-      })
-      dataIndex = (dataIndex + 1) % dataLen
-      pie.dispatchAction({
-        type: 'highlight',
-        seriesIndex: 0,
-        dataIndex
-      })
-      // 显示 tooltip
-      pie.dispatchAction({
-        type: 'showTip',
-        seriesIndex: 0,
-        dataIndex
-      })
-    }, 1000)
-    this.connected = true
+    // let dataIndex = -1
+    // const pie = this.$refs.pie
+    // const dataLen = pie.options.series[0].data.length
+    // setInterval(() => {
+    //   pie.dispatchAction({
+    //     type: 'downplay',
+    //     seriesIndex: 0,
+    //     dataIndex
+    //   })
+    //   dataIndex = (dataIndex + 1) % dataLen
+    //   pie.dispatchAction({
+    //     type: 'highlight',
+    //     seriesIndex: 0,
+    //     dataIndex
+    //   })
+    //   // 显示 tooltip
+    //   pie.dispatchAction({
+    //     type: 'showTip',
+    //     seriesIndex: 0,
+    //     dataIndex
+    //   })
+    // }, 1000)
+    // this.connected = true
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <el-form class="card-box login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
-      <h3 class="title">系统登录</h3>
+      <h3 class="title">风控大数据平台</h3>
 
       <el-form-item prop="username">
         <span class="svg-container svg-container_login">
@@ -21,10 +21,10 @@
 
       <el-button type="primary" style="width:100%;margin-bottom:30px;" :loading="loading" @click.native.prevent="handleLogin">登录</el-button>
 
-      <div class='tips'>账号:admin 密码随便填</div>
+      <!-- <div class='tips'>账号:admin 密码随便填</div>
       <div class='tips'>账号:editor  密码随便填</div>
 
-      <el-button class='thirdparty-button' type="primary" @click='showDialog=true'>打开第三方登录</el-button>
+      <el-button class='thirdparty-button' type="primary" @click='showDialog=true'>打开第三方登录</el-button> -->
     </el-form>
 
     <el-dialog title="第三方验证" :visible.sync="showDialog">
@@ -131,14 +131,14 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss">
   @import "src/styles/mixin.scss";
-  $bg:#2d3a4b;
+  $bg:url('../../assets/bg.jpg');
   $dark_gray:#889aa4;
   $light_gray:#eee;
 
   .login-container {
     @include relative;
     height: 100vh;
-    background-color: $bg;
+    background: $bg;
     input:-webkit-autofill {
       -webkit-box-shadow: 0 0 0px 1000px #293444 inset !important;
       -webkit-text-fill-color: #fff !important;
