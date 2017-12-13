@@ -398,7 +398,8 @@ function convertData(data) {
 }
 
 export default {
-  backgroundColor: '#404a59',
+  // backgroundColor: '#404a59',
+  backgroundColor: 'rgba(32, 32, 35, 0.1)',
   title: {
     text: '全国主要城市空气质量',
     subtext: 'data from PM25.in',
