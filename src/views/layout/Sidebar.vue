@@ -37,7 +37,7 @@ export default {
   height: 50px;
   margin: 25px auto 0;
   border-radius: 25px;
-  background: url('../../assets/bg.jpg') no-repeat center / cover;
+  background: url('../../assets/login-logo.jpg') no-repeat center / cover;
 }
 </style>
 
