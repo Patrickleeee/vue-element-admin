@@ -90,10 +90,10 @@ export default{
         }
       },
       data: [
+                { value: 135, name: '准入强规则' },
+                { value: 310, name: '准入中规则' },
+                { value: 234, name: '准入弱规则' },
                 { value: 335, name: '授信' },
-                { value: 310, name: '准入强规则' },
-                { value: 234, name: '准入中规则' },
-                { value: 135, name: '准入弱规则' },
                 { value: 1048, name: '恶性规则' },
                 { value: 251, name: '非恶性规则-店铺' },
                 { value: 147, name: '非恶性规则-商户' },
