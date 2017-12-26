@@ -61,6 +61,16 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/businessMarket',
+    component: Layout,
+    redirect: '/businessMarket/riskMap',
+    name: '深一号',
+    icon: 'clipboard',
+    children: [
+      { path: 'riskMap', component: _import('businessMarket/riskMap'), name: '经销商' }
+    ]
+  },
+  {
     path: '/riskAlarmManagement',
     component: Layout,
     redirect: '/riskAlarmManagement/checkTable',

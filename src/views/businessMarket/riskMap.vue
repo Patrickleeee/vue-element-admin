@@ -48,16 +48,17 @@ export default {
     };
   },
   methods: {
-    drawChinaMap() {
+    drawChinaMap(formatData) {
       this.items = document.querySelectorAll(".flex-container .item");
       for (let i = 0; i < this.items.length; i++) {
         this.items[i].dataset.order = i + 1;
       }
       // map
       var myMap = this.$echarts.init(document.getElementById("mapContainer"));
-      let thisMap = setMapOption(
-        this.formatMapData(this.dealerData, this.mapData)
-      );
+      // var formatData = this.formatMapData(this.dealerData, this.mapData);
+      // console.log("格式化数据",formatData)
+      let thisMap = setMapOption(formatData);
+
       myMap.setOption(thisMap);
 
       // pie
@@ -103,36 +104,43 @@ export default {
      * @augments {} map
      */
     formatMapData(data, map) {
-      let newData = data.map(item => {
+      return data.map(item => {
         return {
           name: item.name,
           value: map[item.name] ? map[item.name].concat(item.value) : []
         };
       });
-      return newData;
     },
     initData() {
-      new Promise((resolve, reject) => {
-        getDealer()
-          .then(response => {
-            console.log("经销商数据3：".concat(response.data.data.datas));
-            this.dealerData = response.data.data.datas;
-            console.log(this.dealerData);
-            this.mapData = response.data.data.map;
-            console.log(this.mapData);
-            resolve();
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
+      var that = this;
     }
   },
-  mounted() {
+  created() {
     this.initData();
-    this.drawChinaMap();
+  },
+  mounted() {
+    let that = this;
+    new Promise((resolve, reject) => {
+      getDealer()
+        .then(response => {
+          // console.log("经销商数据3：", response.data.data.datas);
+          that.dealerData = response.data.data.datas;
+          console.log("dealerData", that.dealerData);
+          that.mapData = response.data.data.map;
+          console.log("mapData", that.mapData);
+          var formatData = this.formatMapData(that.dealerData, that.mapData);
+          console.log("格式化数据", formatData);
+          this.drawChinaMap(formatData);
+          resolve();
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+    // console.log("dealerData", this.dealerData)
+    // console.log("mapData", this.mapData)
   }
-}
+};
 </script>
         
 <style scoped>

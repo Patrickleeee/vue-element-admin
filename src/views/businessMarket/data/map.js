@@ -188,7 +188,7 @@ const setMapOption = (formatData) => {
     //   data: categoryData
     // },
     series: [{
-        name: 'pm2.5',
+        name: '门店数',
         type: 'scatter',
         coordinateSystem: 'geo',
         data: formatData,
