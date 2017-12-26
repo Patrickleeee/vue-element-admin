@@ -36,3 +36,10 @@ export function sendRq() {
   })
 }
 
+export function getDealer() {
+  return fetch({
+    url: '/dealer',
+    method: 'get'
+  })
+}
+

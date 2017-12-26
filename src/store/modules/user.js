@@ -1,4 +1,4 @@
-import { loginByUsername, logout, getUserInfo, sendRq } from '@/api/login'
+import { loginByUsername, logout, getUserInfo, sendRq, getDealer } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -70,6 +70,18 @@ const user = {
       }
 
       )
+    },
+
+    GetDealer({ commit }) {
+      return new Promise((resolve, reject) => {
+        getDealer().then(response => {
+          console.log('经销商数据：'.concat(response.data.data.datas))
+          resolve()
+          return response
+        }).catch(error => {
+          reject(error)
+        })
+      })
     },
 
     // 获取用户信息

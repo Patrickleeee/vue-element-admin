@@ -32,6 +32,8 @@ import chinaMap from "./china.json";
 // registering map data
 echarts.registerMap("china", chinaMap);
 
+import { getDealer } from "@/api/login";
+
 export default {
   name: "",
   data() {
@@ -42,7 +44,7 @@ export default {
       line,
       items: [],
       dealerData: [],
-      mapData: []
+      mapData: {}
     };
   },
   methods: {
@@ -53,7 +55,9 @@ export default {
       }
       // map
       var myMap = this.$echarts.init(document.getElementById("mapContainer"));
-      var thisMap = setMapOption(this.formatMapData(this.dealerData, this.mapData))
+      let thisMap = setMapOption(
+        this.formatMapData(this.dealerData, this.mapData)
+      );
       myMap.setOption(thisMap);
 
       // pie
@@ -102,39 +106,31 @@ export default {
       let newData = data.map(item => {
         return {
           name: item.name,
-          value: map[item.name]
-            ? map[item.name].concat(item.value)
-            : []
+          value: map[item.name] ? map[item.name].concat(item.value) : []
         };
-      })
-      return newData
+      });
+      return newData;
+    },
+    initData() {
+      new Promise((resolve, reject) => {
+        getDealer()
+          .then(response => {
+            console.log("经销商数据3：".concat(response.data.data.datas));
+            this.dealerData = response.data.data.datas;
+            console.log(this.dealerData);
+            this.mapData = response.data.data.map;
+            console.log(this.mapData);
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
     }
   },
   mounted() {
+    this.initData();
     this.drawChinaMap();
-    // let dataIndex = -1
-    // const pie = this.$refs.pie
-    // const dataLen = pie.options.series[0].data.length
-    // setInterval(() => {
-    //   pie.dispatchAction({
-    //     type: 'downplay',
-    //     seriesIndex: 0,
-    //     dataIndex
-    //   })
-    //   dataIndex = (dataIndex + 1) % dataLen
-    //   pie.dispatchAction({
-    //     type: 'highlight',
-    //     seriesIndex: 0,
-    //     dataIndex
-    //   })
-    //   // 显示 tooltip
-    //   pie.dispatchAction({
-    //     type: 'showTip',
-    //     seriesIndex: 0,
-    //     dataIndex
-    //   })
-    // }, 1000)
-    // this.connected = true
   }
 };
 </script>
