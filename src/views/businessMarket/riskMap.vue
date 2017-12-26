@@ -15,7 +15,7 @@
         
 <script>
 // import option from './data/map-options'  // 引入配置项
-import map from "./data/map";
+import setMapOption from "./data/map";
 import pie from "./data/pie";
 import bar from "./data/bar";
 import radar from "./data/radar";
@@ -53,7 +53,7 @@ export default {
       }
       // map
       var myMap = this.$echarts.init(document.getElementById("mapContainer"));
-      var thisMap = map(this.formatMapData(this.data.dealerData, this.data.mapData))
+      var thisMap = setMapOption(this.formatMapData(this.dealerData, this.mapData))
       myMap.setOption(thisMap);
 
       // pie

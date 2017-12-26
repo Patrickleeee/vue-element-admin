@@ -634,7 +634,7 @@ const geoCoordMap = {
 //   return res
 // }
 
-export default mapOptions = (formatData) => {
+const setMapOption = (formatData) => {
   return {
     // backgroundColor: '#404a59',
     backgroundColor: 'rgba(32, 32, 35, 0.1)',
@@ -839,3 +839,4 @@ export default mapOptions = (formatData) => {
     ]
   }
 }
+export default setMapOption
