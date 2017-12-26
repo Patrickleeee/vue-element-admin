@@ -132,7 +132,7 @@ export default {
     this.initData();
     this.drawChinaMap();
   }
-};
+}
 </script>
         
 <style scoped>
