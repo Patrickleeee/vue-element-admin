@@ -20,6 +20,7 @@ import pie from "./data/pie";
 import bar from "./data/bar";
 import radar from "./data/radar";
 import setAmountOption from "./data/line";
+import setCityOption from "./data/city";
 // require('./data/china')  // 引入china.js地图文件
 import echarts from "echarts/lib/echarts";
 // import "echarts/lib/chart/map";
@@ -31,7 +32,7 @@ import chinaMap from "./china.json";
 // registering map data
 echarts.registerMap("china", chinaMap);
 
-import { getDealer, getMonthAmount } from "@/api/login";
+import { getDealer, getMonthAmount, getCityData } from "@/api/login";
 
 export default {
   name: "",
@@ -59,17 +60,18 @@ export default {
       // pie
       var myPie = this.$echarts.init(document.getElementById("pieContainer"));
       myPie.setOption(pie);
-
-      // radar
-      var myRadar = this.$echarts.init(
-        document.getElementById("radarContainer")
-      );
-      myRadar.setOption(radar);
     },
     drawAmountLine(formatData) {
       var myLine = this.$echarts.init(document.getElementById("lineContainer"));
       let amountLine = setAmountOption(formatData);
       myLine.setOption(amountLine);
+    },
+    drawCity(cityData, seriesData) {
+      var cityElement = this.$echarts.init(
+        document.getElementById("radarContainer")
+      );
+      let cityOption = setCityOption(cityData, seriesData);
+      cityElement.setOption(cityOption);
     },
     _resize() {
       this.$root.charts.forEach(myChart => {
@@ -120,12 +122,54 @@ export default {
         .then(res => {
           const formatData = res.data.data.map(item => {
             return {
-              "name": String(item.year),
-              "type": "line",
-              "data": item.amount
+              name: String(item.year),
+              type: "line",
+              data: item.amount
             };
           });
           this.drawAmountLine(formatData);
+          resolve();
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+
+    new Promise((resolve, reject) => {
+      getCityData()
+        .then(res => {
+          let seriesData = [
+            {
+              name: "门店数量",
+              type: "bar",
+              stack: "总量",
+              label: {
+                normal: {
+                  show: true,
+                  position: "insideRight",
+                  fontSize: 14
+                }
+              },
+              barMinHeight: 20,
+              color: ["#DE5145"],
+              data: res.data.data.shopNum.slice(0, 10).reverse()
+            }, {
+              name: "红星门店数量",
+              type: "bar",
+              stack: "总量",
+              label: {
+                normal: {
+                  show: true,
+                  position: "insideRight",
+                  fontSize: 14
+                }
+              },
+              barMinHeight: 20,
+              color: ["#91c7ae"],
+              data: res.data.data.redStar.slice(0, 10).reverse()
+            }
+          ];
+          this.drawCity(res.data.data.province.slice(0, 10).reverse(), seriesData);
           resolve();
         })
         .catch(error => {

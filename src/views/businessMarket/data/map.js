@@ -71,7 +71,16 @@ const setMapOption = (formatData) => {
     //   }
     // }],
     tooltip: {
-      trigger: 'item'
+      trigger: 'item',
+      formatter: function (params, ticket, callback) {
+        //x轴名称  
+        var name = params.name
+        //图表title名称  
+        var seriesName = params.seriesName
+        //值  
+        var value = params.value
+        return name + '<br />' + seriesName + '：' + value[2]
+      }
     },
     legend: {
       orient: 'vertical',
@@ -246,7 +255,7 @@ const setMapOption = (formatData) => {
         //     }
         //   },
         //   data: sortData(data)
-  
+
       }
     ]
   }

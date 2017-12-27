@@ -50,3 +50,9 @@ export function getMonthAmount() {
   })
 }
 
+export function getCityData() {
+  return fetch({
+    url: '/dealer/city',
+    method: 'get'
+  })
+}

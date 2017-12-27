@@ -9,7 +9,7 @@ const setAmountOption = (formatData) => {
     },
     tooltip: {
       trigger: 'axis',
-      formatter: "{b} <br/>{a0}: {c0} 万元<br/>{a1}: {c1} 万元"
+      formatter: "{b}<br/>{a0}: {c0} 万元<br/>{a1}: {c1} 万元"
     },
     legend: {
       data: yearData
