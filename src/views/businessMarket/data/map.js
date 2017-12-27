@@ -77,7 +77,7 @@ const setMapOption = (formatData) => {
       orient: 'vertical',
       y: 'bottom',
       x: 'right',
-      data: ['homefax'],
+      data: ['门店数'],
       textStyle: {
         color: '#fff'
       }
