@@ -19,20 +19,19 @@ import setMapOption from "./data/map";
 import pie from "./data/pie";
 import bar from "./data/bar";
 import radar from "./data/radar";
-import line from "./data/line";
+import setAmountOption from "./data/line";
 // require('./data/china')  // 引入china.js地图文件
 import echarts from "echarts/lib/echarts";
-import "echarts/lib/chart/map";
-import "echarts/lib/chart/pie";
-import "echarts/lib/chart/bar";
-import "echarts/lib/chart/radar";
-import "echarts/lib/chart/line";
+// import "echarts/lib/chart/map";
+// import "echarts/lib/chart/pie";
+// import "echarts/lib/chart/bar";
+// import "echarts/lib/chart/radar";
 // Map of China
 import chinaMap from "./china.json";
 // registering map data
 echarts.registerMap("china", chinaMap);
 
-import { getDealer } from "@/api/login";
+import { getDealer, getMonthAmount } from "@/api/login";
 
 export default {
   name: "",
@@ -41,7 +40,6 @@ export default {
       pie,
       bar,
       radar,
-      line,
       items: [],
       dealerData: [],
       mapData: {}
@@ -55,25 +53,23 @@ export default {
       }
       // map
       var myMap = this.$echarts.init(document.getElementById("mapContainer"));
-      // var formatData = this.formatMapData(this.dealerData, this.mapData);
-      // console.log("格式化数据",formatData)
       let thisMap = setMapOption(formatData);
-
       myMap.setOption(thisMap);
 
       // pie
       var myPie = this.$echarts.init(document.getElementById("pieContainer"));
       myPie.setOption(pie);
 
-      // line
-      var myLine = this.$echarts.init(document.getElementById("lineContainer"));
-      myLine.setOption(line);
-
       // radar
       var myRadar = this.$echarts.init(
         document.getElementById("radarContainer")
       );
       myRadar.setOption(radar);
+    },
+    drawAmountLine(formatData) {
+      var myLine = this.$echarts.init(document.getElementById("lineContainer"));
+      let amountLine = setAmountOption(formatData);
+      myLine.setOption(amountLine);
     },
     _resize() {
       this.$root.charts.forEach(myChart => {
@@ -83,7 +79,7 @@ export default {
     clickChart(clickIndex) {
       const activeItem = document.querySelector(".flex-container .active");
       const activeIndex = activeItem.dataset.order;
-      console.log(activeIndex);
+      console.log("当前chart索引", activeIndex);
       const clickItem = this.items[clickIndex - 1];
       if (activeIndex === clickIndex) {
         return;
@@ -119,16 +115,32 @@ export default {
     this.initData();
   },
   mounted() {
-    let that = this;
+    new Promise((resolve, reject) => {
+      getMonthAmount()
+        .then(res => {
+          const formatData = res.data.data.map(item => {
+            return {
+              "name": String(item.year),
+              "type": "line",
+              "data": item.amount
+            };
+          });
+          this.drawAmountLine(formatData);
+          resolve();
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+
     new Promise((resolve, reject) => {
       getDealer()
         .then(response => {
-          // console.log("经销商数据3：", response.data.data.datas);
-          that.dealerData = response.data.data.datas;
-          console.log("dealerData", that.dealerData);
-          that.mapData = response.data.data.map;
-          console.log("mapData", that.mapData);
-          var formatData = this.formatMapData(that.dealerData, that.mapData);
+          this.dealerData = response.data.data.datas;
+          console.log("dealerData", this.dealerData);
+          this.mapData = response.data.data.map;
+          console.log("mapData", this.mapData);
+          var formatData = this.formatMapData(this.dealerData, this.mapData);
           console.log("格式化数据", formatData);
           this.drawChinaMap(formatData);
           resolve();
@@ -137,8 +149,6 @@ export default {
           reject(error);
         });
     });
-    // console.log("dealerData", this.dealerData)
-    // console.log("mapData", this.mapData)
   }
 };
 </script>

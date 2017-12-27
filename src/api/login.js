@@ -43,3 +43,10 @@ export function getDealer() {
   })
 }
 
+export function getMonthAmount() {
+  return fetch({
+    url: '/dealer/monthAmount',
+    method: 'get'
+  })
+}
+
