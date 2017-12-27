@@ -84,12 +84,16 @@ const setMapOption = (formatData) => {
     },
     legend: {
       orient: 'vertical',
-      y: 'bottom',
-      x: 'right',
-      data: ['门店数'],
+      y: 'top',
+      x: 'left',
+      data: ['all', 'Top 1-10', 'Top 11-20', 'Top 21-30'],
       textStyle: {
-        color: '#fff'
-      }
+        color: '#2a333d'
+      },
+      shadowColor: {
+        show: false
+      },
+      selectedMode: 'single'
     },
     // toolbox: {
     //   iconStyle: {
@@ -196,30 +200,9 @@ const setMapOption = (formatData) => {
     //   },
     //   data: categoryData
     // },
-    series: [{
-        name: '门店数',
-        type: 'scatter',
-        coordinateSystem: 'geo',
-        data: formatData,
-        symbolSize: val => val[2] / 1,
-        label: {
-          normal: {
-            formatter: '{b}',
-            position: 'right',
-            show: false
-          },
-          emphasis: {
-            show: true
-          }
-        },
-        itemStyle: {
-          normal: {
-            color: '#ddb926'
-          }
-        }
-      },
+    series: [
       {
-        name: 'Top 5',
+        name: 'Top 1-10',
         type: 'effectScatter',
         coordinateSystem: 'geo',
         data: formatData.length >= 10 ? formatData.slice(0, 10) : formatData,
@@ -256,6 +239,80 @@ const setMapOption = (formatData) => {
         //   },
         //   data: sortData(data)
 
+      },
+      {
+        name: 'Top 11-20',
+        type: 'effectScatter',
+        coordinateSystem: 'geo',
+        data: formatData.length >= 10 ? formatData.slice(10, 20) : formatData,
+        symbolSize: val => val[2] / 10,
+        showEffectOn: 'render',
+        rippleEffect: {
+          brushType: 'stroke'
+        },
+        hoverAnimation: true,
+        label: {
+          normal: {
+            formatter: '{b}',
+            position: 'right',
+            show: true
+          }
+        },
+        itemStyle: {
+          normal: {
+            color: '#f4e925',
+            shadowBlur: 10,
+            shadowColor: '#333'
+          }
+        }
+      },
+      {
+        name: 'Top 21-30',
+        type: 'effectScatter',
+        coordinateSystem: 'geo',
+        data: formatData.length >= 10 ? formatData.slice(20, 30) : formatData,
+        symbolSize: val => val[2] / 10,
+        showEffectOn: 'render',
+        rippleEffect: {
+          brushType: 'stroke'
+        },
+        hoverAnimation: true,
+        label: {
+          normal: {
+            formatter: '{b}',
+            position: 'right',
+            show: true
+          }
+        },
+        itemStyle: {
+          normal: {
+            color: '#f4e925',
+            shadowBlur: 10,
+            shadowColor: '#333'
+          }
+        }
+      },
+      {
+        name: 'all',
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        data: formatData,
+        symbolSize: val => val[2] / 1,
+        label: {
+          normal: {
+            formatter: '{b}',
+            position: 'right',
+            show: true
+          },
+          emphasis: {
+            show: true
+          }
+        },
+        itemStyle: {
+          normal: {
+            color: '#ddb926'
+          }
+        }
       }
     ]
   }
