@@ -4,6 +4,7 @@ const setCityOption = (cityData, seriesData) => {
       text: '2017年1-11月全国年定货60万以上经销商-城市排名Top10',
       left: 'center'
     },
+    backgroundColor: 'rgba(32, 32, 35, 0.1)',
     tooltip: {
       trigger: 'axis',
       axisPointer: { // 坐标轴指示器，坐标轴触发有效

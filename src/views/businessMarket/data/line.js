@@ -7,6 +7,7 @@ const setAmountOption = (formatData) => {
     title: {
       text: '优质经销商销售统计'
     },
+    backgroundColor: 'rgba(32, 32, 35, 0.1)',
     tooltip: {
       trigger: 'axis',
       formatter: "{b}<br/>{a0}: {c0} 万元<br/>{a1}: {c1} 万元"

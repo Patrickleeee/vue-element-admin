@@ -79,7 +79,7 @@ const setMapOption = (formatData) => {
         var seriesName = params.seriesName
         //值  
         var value = params.value
-        return name + '<br />' + seriesName + '：' + value[2]
+        return name + '<br />' + '门店数：' + value[2]
       }
     },
     legend: {
@@ -202,20 +202,18 @@ const setMapOption = (formatData) => {
     // },
     series: [
       {
-        name: 'Top 1-10',
+        name: 'all',
         type: 'effectScatter',
         coordinateSystem: 'geo',
-        data: formatData.length >= 10 ? formatData.slice(0, 10) : formatData,
-        symbolSize: val => val[2] / 10,
-        showEffectOn: 'render',
-        rippleEffect: {
-          brushType: 'stroke'
-        },
-        hoverAnimation: true,
+        data: formatData,
+        symbolSize: value => value[2] * 1,
         label: {
           normal: {
             formatter: '{b}',
             position: 'right',
+            show: true
+          },
+          emphasis: {
             show: true
           }
         },
@@ -225,8 +223,31 @@ const setMapOption = (formatData) => {
             shadowBlur: 10,
             shadowColor: '#333'
           }
+        }
+      },
+      {
+        name: 'Top 1-10',
+        type: 'effectScatter',
+        coordinateSystem: 'geo',
+        data: formatData.length >= 10 ? formatData.slice(0, 10) : formatData,
+        symbolSize: value => value[2] * 1,
+        label: {
+          normal: {
+            formatter: '{b}',
+            position: 'right',
+            show: true
+          },
+          emphasis: {
+            show: true
+          }
         },
-        zlevel: 1
+        itemStyle: {
+          normal: {
+            color: '#f4e925',
+            shadowBlur: 10,
+            shadowColor: '#333'
+          }
+        }
         // }, {
         //   id: 'bar',
         //   zlevel: 2,
@@ -245,16 +266,14 @@ const setMapOption = (formatData) => {
         type: 'effectScatter',
         coordinateSystem: 'geo',
         data: formatData.length >= 10 ? formatData.slice(10, 20) : formatData,
-        symbolSize: val => val[2] / 10,
-        showEffectOn: 'render',
-        rippleEffect: {
-          brushType: 'stroke'
-        },
-        hoverAnimation: true,
+        symbolSize: value => value[2] * 2,
         label: {
           normal: {
             formatter: '{b}',
             position: 'right',
+            show: true
+          },
+          emphasis: {
             show: true
           }
         },
@@ -271,33 +290,7 @@ const setMapOption = (formatData) => {
         type: 'effectScatter',
         coordinateSystem: 'geo',
         data: formatData.length >= 10 ? formatData.slice(20, 30) : formatData,
-        symbolSize: val => val[2] / 10,
-        showEffectOn: 'render',
-        rippleEffect: {
-          brushType: 'stroke'
-        },
-        hoverAnimation: true,
-        label: {
-          normal: {
-            formatter: '{b}',
-            position: 'right',
-            show: true
-          }
-        },
-        itemStyle: {
-          normal: {
-            color: '#f4e925',
-            shadowBlur: 10,
-            shadowColor: '#333'
-          }
-        }
-      },
-      {
-        name: 'all',
-        type: 'scatter',
-        coordinateSystem: 'geo',
-        data: formatData,
-        symbolSize: val => val[2] / 1,
+        symbolSize: value => value[2] * 3,
         label: {
           normal: {
             formatter: '{b}',
@@ -310,10 +303,13 @@ const setMapOption = (formatData) => {
         },
         itemStyle: {
           normal: {
-            color: '#ddb926'
+            color: '#f4e925',
+            shadowBlur: 10,
+            shadowColor: '#333'
           }
         }
       }
+      
     ]
   }
 }
