@@ -84,11 +84,19 @@ const setMapOption = (formatData) => {
     },
     legend: {
       orient: 'vertical',
-      y: 'bottom',
-      x: 'right',
-      data: ['门店数'],
+      y: 'top',
+      x: 'left',
+      data: ['Top 10', 'Top 20', 'Top 30'],
       textStyle: {
-        color: '#fff'
+        color: '#2a333d'
+      },
+      shadowColor: {
+        show: false
+      },
+      selected: {
+        'Top 10': true,
+        'Top 20': false,
+        'Top 30': false,
       }
     },
     // toolbox: {
@@ -196,30 +204,9 @@ const setMapOption = (formatData) => {
     //   },
     //   data: categoryData
     // },
-    series: [{
-        name: '门店数',
-        type: 'scatter',
-        coordinateSystem: 'geo',
-        data: formatData,
-        symbolSize: val => val[2] / 1,
-        label: {
-          normal: {
-            formatter: '{b}',
-            position: 'right',
-            show: false
-          },
-          emphasis: {
-            show: true
-          }
-        },
-        itemStyle: {
-          normal: {
-            color: '#ddb926'
-          }
-        }
-      },
+    series: [
       {
-        name: 'Top 5',
+        name: 'Top 10',
         type: 'effectScatter',
         coordinateSystem: 'geo',
         data: formatData.length >= 10 ? formatData.slice(0, 10) : formatData,
@@ -256,6 +243,80 @@ const setMapOption = (formatData) => {
         //   },
         //   data: sortData(data)
 
+      },
+      {
+        name: 'Top 20',
+        type: 'effectScatter',
+        coordinateSystem: 'geo',
+        data: formatData.length >= 10 ? formatData.slice(0, 20) : formatData,
+        symbolSize: val => val[2] / 10,
+        showEffectOn: 'render',
+        rippleEffect: {
+          brushType: 'stroke'
+        },
+        hoverAnimation: true,
+        label: {
+          normal: {
+            formatter: '{b}',
+            position: 'right',
+            show: true
+          }
+        },
+        itemStyle: {
+          normal: {
+            color: '#f4e925',
+            shadowBlur: 10,
+            shadowColor: '#333'
+          }
+        }
+      },
+      {
+        name: 'Top 30',
+        type: 'effectScatter',
+        coordinateSystem: 'geo',
+        data: formatData.length >= 10 ? formatData.slice(0, 30) : formatData,
+        symbolSize: val => val[2] / 10,
+        showEffectOn: 'render',
+        rippleEffect: {
+          brushType: 'stroke'
+        },
+        hoverAnimation: true,
+        label: {
+          normal: {
+            formatter: '{b}',
+            position: 'right',
+            show: true
+          }
+        },
+        itemStyle: {
+          normal: {
+            color: '#f4e925',
+            shadowBlur: 10,
+            shadowColor: '#333'
+          }
+        }
+      },
+      {
+        name: '门店数',
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        data: formatData,
+        symbolSize: val => val[2] / 1,
+        label: {
+          normal: {
+            formatter: '{b}',
+            position: 'right',
+            show: false
+          },
+          emphasis: {
+            show: true
+          }
+        },
+        itemStyle: {
+          normal: {
+            color: '#ddb926'
+          }
+        }
       }
     ]
   }
